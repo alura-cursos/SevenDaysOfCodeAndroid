@@ -1,6 +1,7 @@
 package br.com.alura.devhub
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -23,12 +24,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import br.com.alura.devhub.ui.theme.DevHubTheme
+import br.com.alura.devhub.webclient.RetrofitInit
 import coil.compose.AsyncImage
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            RetrofitInit().gitHubService.findProfileBy("alexfelipe")
+                .let {
+                    Log.i("MainActivity", "onCreate: $it")
+                }
+        }
         setContent {
             DevHubTheme {
                 // A surface container using the 'background' color from the theme
