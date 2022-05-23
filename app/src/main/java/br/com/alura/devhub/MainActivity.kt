@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.alura.devhub.ui.theme.DevHubTheme
+import coil.compose.AsyncImage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,9 +65,10 @@ fun ProfileScreen() {
                 )
                 .height(boxHeight)
         ) {
-            Image(
-                painterResource(id = R.drawable.alex_avatar),
+            AsyncImage(
+                "https://avatars.githubusercontent.com/u/8989346?v=4",
                 contentDescription = "profile pic",
+                placeholder = painterResource(R.drawable.user_placeholder),
                 modifier = Modifier
                     .offset(y = imageHeight / 2)
                     .size(imageHeight)
